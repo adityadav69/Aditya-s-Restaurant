@@ -1,14 +1,21 @@
 import mongoose from "mongoose";
 
 export const dbConnection = () => {
+  const mongoURI = process.env.MONGO_URI;
+
+  if (!mongoURI) {
+    console.error(" MONGO_URI is undefined. Check your env file and dotenv config.");
+    return;
+  }
+
   mongoose
-    .connect(process.env.MONGO_URI, {
+    .connect(mongoURI, {
       dbName: "RESERVATIONS",
     })
     .then(() => {
-      console.log("Connected to database!");
+      console.log(" Connected to MongoDB database: RESERVATIONS");
     })
     .catch((err) => {
-      console.log(`Some error occured while connecing to database: ${err}`);
+      console.error(" Database connection error:", err.message);
     });
 };
