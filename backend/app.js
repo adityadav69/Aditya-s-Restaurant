@@ -10,11 +10,12 @@ dotenv.config({ path: "./config.env" });
 
 app.use(
   cors({
-    origin: [process.env.FRONTEND_URL],
-    methods: ["POST"],
-    credentials: true,
+    origin: "*", // 🔓 Accepts requests from any origin
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true, // Agar cookies/via credentials use ho rahe ho to true
   })
 );
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
